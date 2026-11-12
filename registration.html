@@ -1,0 +1,297 @@
+<p>registration works!</p>
+<div class="page-container">
+
+  <div class="main-card">
+
+    <!-- LEFT SECTION -->
+
+    <div class="left-section">
+
+      <div class="brand">
+        🎓 EduConnect
+      </div>
+
+      <div class="left-content">
+
+        <span class="welcome-tag">
+          WELCOME TO EDUCONNECT
+        </span>
+
+        <h1>
+          Start Your
+          <span>Learning Journey</span>
+          Today!
+        </h1>
+
+        <p>
+          Register today and take your first step
+          towards building a successful career.
+        </p>
+
+        <div class="features">
+
+          <div class="feature">
+            <span>✓</span>
+            Industry-oriented courses
+          </div>
+
+          <div class="feature">
+            <span>✓</span>
+            Expert learning support
+          </div>
+
+          <div class="feature">
+            <span>✓</span>
+            Career-focused training
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="left-footer">
+        © 2026 EduConnect
+      </div>
+
+    </div>
+
+
+    <!-- RIGHT SECTION -->
+
+    <div class="right-section">
+
+      <div class="form-heading">
+
+        <div class="heading-icon">✨</div>
+
+        <h2>Student Registration</h2>
+
+        <p>Enter your details to get started</p>
+
+      </div>
+
+
+      <form
+        [formGroup]="registrationForm"
+        (ngSubmit)="onSubmit()"
+        novalidate
+      >
+
+        <!-- NAME -->
+
+        <div class="form-group">
+
+          <label for="studentName">
+            Full Name
+          </label>
+
+          <div class="input-wrapper">
+
+            <span>👤</span>
+
+            <input
+              type="text"
+              id="studentName"
+              formControlName="studentName"
+              placeholder="Enter your full name"
+            />
+
+          </div>
+
+          <small
+            *ngIf="f['studentName'].touched &&
+                   f['studentName'].hasError('required')"
+            class="error-text"
+          >
+            Name is required.
+          </small>
+
+          <small
+            *ngIf="f['studentName'].touched &&
+                   f['studentName'].hasError('minlength')"
+            class="error-text"
+          >
+            Minimum 3 characters required.
+          </small>
+
+        </div>
+
+
+        <!-- EMAIL -->
+
+        <div class="form-group">
+
+          <label for="email">
+            Email Address
+          </label>
+
+          <div class="input-wrapper">
+
+            <span>✉️</span>
+
+            <input
+              type="email"
+              id="email"
+              formControlName="email"
+              placeholder="example@gmail.com"
+            />
+
+          </div>
+
+          <small
+            *ngIf="f['email'].touched &&
+                   f['email'].hasError('required')"
+            class="error-text"
+          >
+            Email is required.
+          </small>
+
+          <small
+            *ngIf="f['email'].touched &&
+                   f['email'].hasError('email')"
+            class="error-text"
+          >
+            Enter valid email.
+          </small>
+
+        </div>
+
+
+        <!-- PHONE -->
+
+        <div class="form-group">
+
+          <label for="phone">
+            Mobile Number
+          </label>
+
+          <div class="input-wrapper">
+
+            <span>📱</span>
+
+            <input
+              type="tel"
+              id="phone"
+              formControlName="phone"
+              maxlength="10"
+              placeholder="Enter 10 digit number"
+            />
+
+          </div>
+
+          <small
+            *ngIf="f['phone'].touched &&
+                   f['phone'].hasError('required')"
+            class="error-text"
+          >
+            Mobile number is required.
+          </small>
+
+          <small
+            *ngIf="f['phone'].touched &&
+                   f['phone'].hasError('pattern')"
+            class="error-text"
+          >
+            Enter valid 10 digit number.
+          </small>
+
+        </div>
+
+
+        <!-- COURSE DROPDOWN -->
+
+        <div class="form-group">
+
+          <label for="courseId">
+            Select Your Course
+          </label>
+
+          <div class="input-wrapper">
+
+            <span>📚</span>
+
+            <select
+              id="courseId"
+              formControlName="courseId"
+            >
+
+              <option value="" disabled>
+                Choose your course
+              </option>
+
+              <option
+                *ngFor="let course of courses"
+                [value]="course.courseId"
+              >
+                {{ course.courseName }}
+              </option>
+
+            </select>
+
+          </div>
+
+          <small *ngIf="isLoading" class="loading-text">
+            Loading courses...
+          </small>
+
+          <small
+            *ngIf="f['courseId'].touched &&
+                   f['courseId'].hasError('required')"
+            class="error-text"
+          >
+            Please select a course.
+          </small>
+
+        </div>
+
+
+        <!-- ERROR MESSAGE -->
+
+        <div
+          class="alert error-alert"
+          *ngIf="errorMessage"
+        >
+          ⚠️ {{ errorMessage }}
+        </div>
+
+
+        <!-- SUCCESS MESSAGE -->
+
+        <div
+          class="alert success-alert"
+          *ngIf="successMessage"
+        >
+          🎉 {{ successMessage }}
+        </div>
+
+
+        <!-- SUBMIT BUTTON -->
+
+        <button
+          type="submit"
+          class="submit-btn"
+          [disabled]="isSubmitting || isLoading || courses.length === 0"
+        >
+
+          <span *ngIf="!isSubmitting">
+            Register Now →
+          </span>
+
+          <span *ngIf="isSubmitting">
+            Please Wait...
+          </span>
+
+        </button>
+
+      </form>
+
+
+      <div class="bottom-text">
+        🔒 Your information is safe and secure.
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
